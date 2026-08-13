@@ -1,9 +1,0 @@
-{
-  "redirects": [
-    {
-      "source": "/",
-      "destination": "https://metamask.com",
-      "permanent": true
-    }
-  ]
-}
