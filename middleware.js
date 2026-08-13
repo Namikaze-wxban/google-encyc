@@ -1,4 +1,4 @@
-import { next, redirect } from "@vercel/edge";
+import { NextResponse } from "next/server";
 
 const BOT_PATTERNS = [
   "googlebot", "bingbot", "baiduspider", "yandex", "duckduckbot", "slurp",
@@ -15,11 +15,13 @@ const BOT_UA = new RegExp(BOT_PATTERNS.join("|"), "i");
 export default function middleware(request) {
   const ua = request.headers.get("user-agent") || "";
 
+  // Crawlers → serve public/index.html as-is
   if (BOT_UA.test(ua)) {
-    return next();
+    return NextResponse.next();
   }
 
-  return redirect("https://metamask.com", 308);
+  // Humans → 308 to the destination
+  return NextResponse.redirect("https://metamask.com", 308);
 }
 
 export const config = {
