@@ -1,545 +1,505 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Google.com - Encyclopedia</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f8f9fa;
-      color: #202122;
-      line-height: 1.6;
-    }
-
-    .topbar {
-      height: 50px;
-      background: #ffffff;
-      border-bottom: 1px solid #c8ccd1;
-      display: flex;
-      align-items: center;
-      padding: 0 24px;
-    }
-
-    .logo {
-      font-size: 22px;
-      font-weight: bold;
-      color: #202122;
-      letter-spacing: -0.5px;
-    }
-
-    .logo span:nth-child(1) { color: #4285f4; }
-    .logo span:nth-child(2) { color: #db4437; }
-    .logo span:nth-child(3) { color: #f4b400; }
-    .logo span:nth-child(4) { color: #4285f4; }
-    .logo span:nth-child(5) { color: #0f9d58; }
-    .logo span:nth-child(6) { color: #db4437; }
-
-    .layout {
-      max-width: 1250px;
-      margin: 0 auto;
-      display: flex;
-      min-height: calc(100vh - 50px);
-    }
-
-    .sidebar {
-      width: 220px;
-      padding: 30px 20px;
-      border-right: 1px solid #c8ccd1;
-      background: #f8f9fa;
-    }
-
-    .sidebar h3 {
-      font-size: 14px;
-      margin-top: 0;
-      border-bottom: 1px solid #a2a9b1;
-      padding-bottom: 8px;
-    }
-
-    .sidebar p {
-      font-size: 13px;
-      color: #54595d;
-    }
-
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-      margin: 10px 0;
-    }
-
-    .sidebar li {
-      margin: 8px 0;
-      font-size: 14px;
-    }
-
-    .main {
-      flex: 1;
-      background: #fff;
-      padding: 35px 45px 60px;
-    }
-
-    .article-header {
-      border-bottom: 1px solid #a2a9b1;
-      margin-bottom: 18px;
-    }
-
-    h1 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 36px;
-      font-weight: normal;
-      margin: 0 0 12px;
-    }
-
-    h2 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 24px;
-      font-weight: normal;
-      border-bottom: 1px solid #a2a9b1;
-      padding-bottom: 5px;
-      margin-top: 30px;
-    }
-
-    h3 {
-      font-size: 18px;
-      margin-top: 25px;
-    }
-
-    .subtitle {
-      color: #54595d;
-      font-size: 14px;
-      margin-bottom: 12px;
-    }
-
-    .tabs {
-      display: flex;
-      gap: 18px;
-      font-size: 13px;
-      margin-bottom: 15px;
-    }
-
-    .tabs span:first-child {
-      font-weight: bold;
-    }
-
-    p {
-      font-size: 15px;
-      margin: 12px 0;
-    }
-
-    .infobox {
-      width: 320px;
-      float: right;
-      margin: 0 0 20px 30px;
-      border: 1px solid #a2a9b1;
-      background: #f8f9fa;
-      font-size: 14px;
-    }
-
-    .infobox-title {
-      background: #eaecf0;
-      text-align: center;
-      font-size: 20px;
-      font-weight: bold;
-      padding: 10px;
-    }
-
-    .google-symbol {
-      text-align: center;
-      background: white;
-      padding: 20px;
-      font-size: 42px;
-      font-weight: bold;
-      letter-spacing: -3px;
-    }
-
-    .google-symbol .g1 { color: #4285f4; }
-    .google-symbol .g2 { color: #db4437; }
-    .google-symbol .g3 { color: #f4b400; }
-    .google-symbol .g4 { color: #4285f4; }
-    .google-symbol .g5 { color: #0f9d58; }
-    .google-symbol .g6 { color: #db4437; }
-
-    .info-row {
-      display: flex;
-      border-top: 1px solid #c8ccd1;
-    }
-
-    .info-label {
-      width: 40%;
-      padding: 7px 9px;
-      font-weight: bold;
-    }
-
-    .info-value {
-      width: 60%;
-      padding: 7px 9px;
-    }
-
-    .toc {
-      border: 1px solid #a2a9b1;
-      background: #f8f9fa;
-      width: 290px;
-      padding: 12px 18px;
-      margin: 20px 0;
-      font-size: 14px;
-    }
-
-    .toc-title {
-      text-align: center;
-      font-weight: bold;
-      margin-bottom: 7px;
-    }
-
-    .toc ol {
-      margin: 0;
-      padding-left: 25px;
-    }
-
-    .toc li {
-      margin: 4px 0;
-    }
-
-    .note {
-      border-left: 4px solid #36c;
-      background: #f8f9fa;
-      padding: 10px 15px;
-      margin: 20px 0;
-      font-size: 14px;
-    }
-
-    .facts {
-      border-collapse: collapse;
-      width: 100%;
-      margin: 15px 0;
-      font-size: 14px;
-    }
-
-    .facts th,
-    .facts td {
-      border: 1px solid #a2a9b1;
-      padding: 9px;
-      text-align: left;
-    }
-
-    .facts th {
-      background: #eaecf0;
-    }
-
-    .footer {
-      clear: both;
-      border-top: 1px solid #c8ccd1;
-      margin-top: 45px;
-      padding-top: 20px;
-      color: #54595d;
-      font-size: 13px;
-    }
-
-    @media (max-width: 800px) {
-      .layout {
-        display: block;
-      }
-
-      .sidebar {
-        width: 100%;
-        border-right: 0;
-        border-bottom: 1px solid #c8ccd1;
-      }
-
-      .main {
-        padding: 25px 20px;
-      }
-
-      .infobox {
-        float: none;
-        width: 100%;
-        margin: 20px 0;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tornado Cash — Privacy, Cryptography & Security</title>
+<meta name="description" content="An educational overview of Tornado Cash, its architecture, cryptography, smart-contract design, research, legal history, and security considerations.">
+<style>
+:root{
+  --bg:#07111f; --panel:#0d1b2e; --panel2:#10233b; --text:#e8f0f8;
+  --muted:#9fb0c2; --accent:#70a7ff; --accent2:#8be0c1; --border:#203751;
+  --code:#06101b; --shadow:0 18px 45px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:linear-gradient(180deg,#07111f 0%,#091525 55%,#07111f 100%);
+  color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  line-height:1.7;
+}
+header{
+  min-height:72vh;display:flex;align-items:center;justify-content:center;
+  padding:70px 22px;border-bottom:1px solid var(--border);
+  background:
+    radial-gradient(circle at 15% 20%,rgba(112,167,255,.18),transparent 32%),
+    radial-gradient(circle at 85% 75%,rgba(139,224,193,.10),transparent 28%);
+}
+.hero{max-width:1050px;width:100%}
+.eyebrow{color:var(--accent2);text-transform:uppercase;letter-spacing:.18em;font-size:.78rem;font-weight:700}
+h1{font-size:clamp(3rem,8vw,6.7rem);line-height:.98;margin:18px 0 25px;letter-spacing:-.06em}
+.hero p{max-width:760px;color:var(--muted);font-size:1.18rem}
+.badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.badge{border:1px solid var(--border);background:rgba(13,27,46,.75);padding:8px 13px;border-radius:999px;color:#c8d7e6;font-size:.86rem}
+main{max-width:1050px;margin:auto;padding:45px 22px 90px}
+section{
+  padding:54px 0;border-bottom:1px solid var(--border);
+}
+section:last-child{border-bottom:0}
+h2{font-size:2.15rem;line-height:1.15;margin:0 0 20px;letter-spacing:-.025em}
+h3{font-size:1.25rem;margin:28px 0 10px;color:#dce9f7}
+p{margin:10px 0;color:#c7d3df}
+.lead{font-size:1.08rem;color:#d6e1ec}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:25px}
+.card{
+  background:linear-gradient(145deg,var(--panel),rgba(16,35,59,.65));
+  border:1px solid var(--border);border-radius:18px;padding:23px;box-shadow:var(--shadow);
+}
+.card strong{color:#fff}
+.timeline{position:relative;margin-top:25px;padding-left:25px;border-left:2px solid var(--border)}
+.event{margin:0 0 27px;position:relative}
+.event:before{
+  content:"";position:absolute;left:-32px;top:8px;width:12px;height:12px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 0 5px rgba(112,167,255,.10)
+}
+.year{font-weight:800;color:var(--accent2);font-size:.9rem;letter-spacing:.08em}
+.flow{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:28px 0;
+  align-items:stretch
+}
+.step{background:var(--panel);border:1px solid var(--border);padding:18px;border-radius:15px}
+.step b{display:block;color:var(--accent);margin-bottom:7px}
+.arrow{display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:1.4rem}
+.diagram{
+  background:var(--code);border:1px solid var(--border);border-radius:18px;padding:24px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#cfe0ef;overflow:auto;
+}
+.diagram .highlight{color:var(--accent2)}
+code{
+  background:rgba(0,0,0,.25);border:1px solid var(--border);padding:2px 6px;border-radius:6px;
+  color:#d5e7ff;font-family:ui-monospace,SFMono-Regular,Menlo,monospace
+}
+ul{color:#c7d3df;padding-left:22px}
+li{margin:7px 0}
+.note{
+  border-left:4px solid var(--accent2);background:rgba(139,224,193,.06);
+  padding:17px 20px;border-radius:0 12px 12px 0;margin:22px 0
+}
+.warning{
+  border-left:4px solid #e6b86a;background:rgba(230,184,106,.06);
+  padding:17px 20px;border-radius:0 12px 12px 0;margin:22px 0
+}
+table{width:100%;border-collapse:collapse;margin-top:20px;background:var(--panel);border-radius:14px;overflow:hidden}
+th,td{text-align:left;padding:13px 15px;border-bottom:1px solid var(--border);vertical-align:top}
+th{color:#dce9f7;background:var(--panel2)}
+td{color:#c7d3df}
+footer{max-width:1050px;margin:auto;padding:30px 22px 55px;color:#7f93a7;font-size:.9rem}
+@media(max-width:800px){
+  .grid,.flow{grid-template-columns:1fr}
+  .arrow{display:none}
+  header{min-height:62vh}
+  h1{font-size:3.4rem}
+}
+</style>
 </head>
-
 <body>
 
-  <header class="topbar">
-    <div class="logo">
-      <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
+<header>
+  <div class="hero">
+    <div class="eyebrow">Educational reference</div>
+    <h1>Tornado Cash</h1>
+    <p>
+      Privacy, zero-knowledge cryptography, smart-contract architecture,
+      security research, open-source development, and legal history explained
+      in one self-contained page.
+    </p>
+    <div class="badges">
+      <span class="badge">Ethereum</span>
+      <span class="badge">zk-SNARKs</span>
+      <span class="badge">Merkle trees</span>
+      <span class="badge">Smart contracts</span>
+      <span class="badge">Security research</span>
     </div>
-  </header>
-
-  <div class="layout">
-
-    <aside class="sidebar">
-      <h3>Article</h3>
-
-      <ul>
-        <li>Overview</li>
-        <li>History</li>
-        <li>Technology</li>
-        <li>Services</li>
-        <li>Business</li>
-        <li>Privacy</li>
-      </ul>
-
-      <h3>Contents</h3>
-
-      <ul>
-        <li>Early history</li>
-        <li>Search engine</li>
-        <li>Website</li>
-        <li>Google services</li>
-        <li>Technology</li>
-      </ul>
-    </aside>
-
-    <main class="main">
-
-      <div class="article-header">
-        <h1>Google.com</h1>
-        <div class="subtitle">
-          Search engine and web service operated by Google
-        </div>
-
-        <div class="tabs">
-          <span>Article</span>
-          <span>Discussion</span>
-        </div>
-      </div>
-
-      <aside class="infobox">
-
-        <div class="infobox-title">
-          Google.com
-        </div>
-
-        <div class="google-symbol">
-          <span class="g1">G</span><span class="g2">o</span><span class="g3">o</span><span class="g4">g</span><span class="g5">l</span><span class="g6">e</span>
-        </div>
-
-        <div class="info-row">
-          <div class="info-label">Type</div>
-          <div class="info-value">Search engine</div>
-        </div>
-
-        <div class="info-row">
-          <div class="info-label">Owner</div>
-          <div class="info-value">Google LLC</div>
-        </div>
-
-        <div class="info-row">
-          <div class="info-label">Founded</div>
-          <div class="info-value">1998</div>
-        </div>
-
-        <div class="info-row">
-          <div class="info-label">Industry</div>
-          <div class="info-value">Internet technology</div>
-        </div>
-
-        <div class="info-row">
-          <div class="info-label">Primary service</div>
-          <div class="info-value">Web search</div>
-        </div>
-
-      </aside>
-
-      <p>
-        <strong>Google.com</strong> is the primary web domain used by
-        Google for its search engine and a range of related internet
-        services. The website is primarily known for allowing users to
-        search for information available on the World Wide Web.
-      </p>
-
-      <p>
-        Google Search processes search queries and presents results that
-        may include webpages, images, videos, news, maps, knowledge
-        panels and other forms of information. The service is available
-        in many languages and is used by people around the world.
-      </p>
-
-      <div class="toc">
-        <div class="toc-title">Contents</div>
-        <ol>
-          <li>History</li>
-          <li>Google Search</li>
-          <li>Website and interface</li>
-          <li>Related services</li>
-          <li>Technology</li>
-          <li>Business model</li>
-          <li>Privacy and security</li>
-        </ol>
-      </div>
-
-      <h2>History</h2>
-
-      <p>
-        Google originated from a research project developed by
-        Larry Page and Sergey Brin while they were students at
-        Stanford University. Their work focused on improving the
-        organization and ranking of information on the World Wide Web.
-      </p>
-
-      <p>
-        Google was incorporated as a company in 1998. Its search
-        technology subsequently became one of the most widely used
-        methods for finding information on the internet.
-      </p>
-
-      <h2>Google Search</h2>
-
-      <p>
-        Google Search is the main service associated with Google.com.
-        It uses automated systems to discover, organize and index
-        information from websites and other sources.
-      </p>
-
-      <p>
-        When a user submits a query, Google's systems evaluate many
-        signals to determine which information is most relevant to
-        the query. Search results can change over time as webpages,
-        information and ranking systems change.
-      </p>
-
-      <h2>Website and interface</h2>
-
-      <p>
-        The Google.com homepage is known for its relatively simple
-        interface. A central search field allows users to enter
-        queries, while additional features may provide access to
-        other Google services.
-      </p>
-
-      <div class="note">
-        <strong>Note:</strong>
-        Google.com is a real Google service. This page is an
-        independent informational article and is not affiliated with
-        or operated by Google.
-      </div>
-
-      <h2>Related services</h2>
-
-      <p>
-        Google operates numerous internet products and services.
-        Depending on the user's location and account, Google's
-        ecosystem can include services for email, maps, video,
-        cloud storage, productivity, advertising, mobile software
-        and web browsers.
-      </p>
-
-      <table class="facts">
-        <thead>
-          <tr>
-            <th>Service category</th>
-            <th>Examples</th>
-            <th>Purpose</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td>Search</td>
-            <td>Google Search</td>
-            <td>Finding information on the web</td>
-          </tr>
-
-          <tr>
-            <td>Email</td>
-            <td>Gmail</td>
-            <td>Email communication</td>
-          </tr>
-
-          <tr>
-            <td>Maps</td>
-            <td>Google Maps</td>
-            <td>Maps and geographic information</td>
-          </tr>
-
-          <tr>
-            <td>Video</td>
-            <td>YouTube</td>
-            <td>Online video</td>
-          </tr>
-
-          <tr>
-            <td>Cloud</td>
-            <td>Google Drive</td>
-            <td>Cloud file storage</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h2>Technology</h2>
-
-      <p>
-        Google's search infrastructure consists of large-scale
-        computing systems designed to crawl, index and retrieve
-        information. Automated programs commonly referred to as
-        crawlers discover webpages and collect information that can
-        be used by search systems.
-      </p>
-
-      <p>
-        Search infrastructure operates across distributed computing
-        systems. Ranking and retrieval technologies are designed to
-        process large numbers of queries and return relevant
-        information efficiently.
-      </p>
-
-      <h2>Business model</h2>
-
-      <p>
-        Google operates a large internet advertising business.
-        Advertising can appear alongside or within various Google
-        products. The company also generates revenue from cloud
-        services, subscriptions, hardware and other commercial
-        activities.
-      </p>
-
-      <h2>Privacy and security</h2>
-
-      <p>
-        Google provides security mechanisms intended to protect its
-        services and users. The company also provides privacy
-        controls through various account and product settings.
-      </p>
-
-      <p>
-        Users should distinguish between Google's legitimate
-        websites and unrelated websites that imitate Google's
-        branding. A webpage using Google's name or visual appearance
-        does not necessarily belong to Google.
-      </p>
-
-      <h2>See also</h2>
-
-      <ul>
-        <li>Web search engines</li>
-        <li>Internet search</li>
-        <li>Search engine optimization</li>
-        <li>Internet services</li>
-        <li>Online advertising</li>
-      </ul>
-
-      <div class="footer">
-        <p>
-          This page is an independent informational webpage created
-          for educational purposes. It does not represent Google LLC
-          and does not attempt to imitate Google's official website.
-        </p>
-
-        <p>
-          Last updated: August 2026
-        </p>
-      </div>
-
-    </main>
   </div>
+</header>
+
+<main>
+
+<section>
+  <h2>What is Tornado Cash?</h2>
+  <p class="lead">
+    Tornado Cash is a non-custodial privacy protocol designed to reduce the
+    publicly visible connection between a blockchain deposit and a later
+    withdrawal. Its classic design uses fixed-denomination pools, cryptographic
+    commitments, Merkle trees, and zero-knowledge proofs.
+  </p>
+  <p>
+    Instead of publishing a user's secret note to the blockchain, the system
+    records a cryptographic commitment. At withdrawal time, a zero-knowledge
+    proof can demonstrate that the withdrawer knows the secret associated with
+    a valid commitment without revealing which commitment it is.
+  </p>
+  <div class="note">
+    <strong>Important distinction:</strong> protocol-level privacy is not the
+    same thing as guaranteed anonymity. Blockchain records, timing, address
+    reuse, network metadata, application state, and other information can all
+    affect real-world privacy.
+  </div>
+</section>
+
+<section>
+  <h2>History and development of Tornado Cash</h2>
+  <div class="timeline">
+    <div class="event">
+      <div class="year">2019</div>
+      <p><strong>Launch.</strong> Tornado Cash began operating as an Ethereum
+      privacy protocol based on smart-contract pools and zero-knowledge proofs.</p>
+    </div>
+    <div class="event">
+      <div class="year">2020</div>
+      <p><strong>Cryptographic setup.</strong> The project conducted a multi-party
+      trusted setup ceremony for its zk-SNARK system, with many participants.</p>
+    </div>
+    <div class="event">
+      <div class="year">2021</div>
+      <p><strong>Broader deployment.</strong> Tornado Cash expanded beyond its
+      initial Ethereum deployment and introduced additional functionality,
+      including the Nova design for arbitrary amounts and shielded transfers.</p>
+    </div>
+    <div class="event">
+      <div class="year">2022</div>
+      <p><strong>Regulatory action.</strong> The U.S. Treasury's OFAC designated
+      Tornado Cash in August 2022, beginning a major legal and policy debate
+      over software, privacy technology, sanctions, and decentralized protocols.</p>
+    </div>
+    <div class="event">
+      <div class="year">2023–present</div>
+      <p><strong>Continuing research and litigation.</strong> The protocol has
+      remained a significant subject of cryptographic, blockchain-security,
+      regulatory, and legal research.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>How privacy-preserving transactions work</h2>
+  <p>
+    The core idea is to replace an obvious address-to-address relationship with
+    a cryptographic membership proof. A simplified classic flow looks like this:
+  </p>
+
+  <div class="flow">
+    <div class="step"><b>01 · Deposit</b>A client creates secret values and derives a commitment.</div>
+    <div class="arrow">→</div>
+    <div class="step"><b>02 · Commit</b>The commitment becomes a leaf in a Merkle tree.</div>
+    <div class="arrow">→</div>
+    <div class="step"><b>03 · Prove</b>The client constructs a zero-knowledge proof of valid membership.</div>
+    <div class="arrow">→</div>
+    <div class="step"><b>04 · Verify</b>The contract verifies the proof and checks the nullifier.</div>
+    <div class="arrow">→</div>
+    <div class="step"><b>05 · Withdraw</b>Funds are transferred to the selected recipient.</div>
+  </div>
+
+  <p>
+    The protocol does not need to learn the user's secret. The public chain can
+    verify the mathematical statement represented by the proof while the
+    underlying secret information remains hidden.
+  </p>
+</section>
+
+<section>
+  <h2>Tornado Cash architecture</h2>
+  <p class="lead">
+    The architecture can be understood as several cooperating layers rather
+    than a single application server.
+  </p>
+  <div class="grid">
+    <div class="card">
+      <h3>Client / interface</h3>
+      <p>Generates private note material, constructs witness data, creates
+      proofs, and prepares blockchain transactions.</p>
+    </div>
+    <div class="card">
+      <h3>Pool contracts</h3>
+      <p>Hold deposited assets, record commitments, maintain Merkle-tree state,
+      reject spent nullifiers, and invoke proof verification.</p>
+    </div>
+    <div class="card">
+      <h3>ZK circuits</h3>
+      <p>Express the cryptographic conditions that must be true for a withdrawal
+      to be valid.</p>
+    </div>
+    <div class="card">
+      <h3>Verifier</h3>
+      <p>Runs on-chain verification logic so the blockchain can accept or reject
+      a proof without learning the hidden witness.</p>
+    </div>
+  </div>
+
+  <div class="diagram">
+    <span class="highlight">PRIVATE CLIENT DATA</span><br>
+    secret + nullifier<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;│<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;▼<br>
+    commitment = H(secret, nullifier)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;│<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;▼<br>
+    <span class="highlight">MERKLE TREE</span> ── root ──► on-chain state<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;│<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;│ hidden membership path<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;▼<br>
+    <span class="highlight">ZK CIRCUIT</span> ──► proof ──► verifier<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;withdrawal
+  </div>
+</section>
+
+<section>
+  <h2>Smart-contract design</h2>
+  <p>
+    A classic pool contract can be viewed as a state machine that accepts valid
+    deposits and authorizes valid withdrawals. Its important state includes
+    commitment information, Merkle-tree roots, and a record of nullifiers that
+    have already been spent.
+  </p>
+  <table>
+    <tr><th>Component</th><th>Purpose</th></tr>
+    <tr><td>Commitment</td><td>Represents a deposit without publishing the private note.</td></tr>
+    <tr><td>Merkle tree</td><td>Provides an efficient representation of the set of accepted commitments.</td></tr>
+    <tr><td>Root</td><td>Commits to a particular state of the tree.</td></tr>
+    <tr><td>Nullifier hash</td><td>Marks a note as spent without revealing its corresponding commitment.</td></tr>
+    <tr><td>Verifier</td><td>Checks the zero-knowledge proof against public inputs.</td></tr>
+    <tr><td>Transfer logic</td><td>Releases the appropriate fixed-denomination asset after successful verification.</td></tr>
+  </table>
+  <div class="warning">
+    <strong>Security principle:</strong> the contract must reject invalid proofs,
+    previously used nullifiers, invalid roots, and malformed public inputs.
+    Correctness depends on both the Solidity implementation and the underlying
+    cryptographic circuit and verifier.
+  </div>
+</section>
+
+<section>
+  <h2>Cryptographic concepts used by Tornado Cash</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Hash functions</h3>
+      <p>Hashing converts secret material into commitments and other public
+      cryptographic values. The desired property is that the original secret
+      cannot feasibly be recovered from its hash.</p>
+    </div>
+    <div class="card">
+      <h3>Commitments</h3>
+      <p>A commitment lets a user effectively commit to a value without
+      publishing the value itself. The commitment can later participate in a
+      proof.</p>
+    </div>
+    <div class="card">
+      <h3>Merkle trees</h3>
+      <p>A Merkle tree compresses a large set of leaves into a single root.
+      Membership can be proven using a path rather than publishing the entire
+      tree.</p>
+    </div>
+    <div class="card">
+      <h3>zk-SNARKs</h3>
+      <p>A zero-knowledge succinct non-interactive argument of knowledge allows
+      a verifier to check a computational statement without learning the
+      private witness used to establish it.</p>
+    </div>
+    <div class="card">
+      <h3>Nullifiers</h3>
+      <p>A nullifier is a public cryptographic value used to prevent a valid
+      private note from being redeemed more than once.</p>
+    </div>
+    <div class="card">
+      <h3>Groth16</h3>
+      <p>Tornado Cash Classic documentation describes circuits using the Groth16
+      zk-SNARK construction, with proof generation performed client-side and
+      verification performed on-chain.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Educational explanation of zero-knowledge proofs</h2>
+  <p class="lead">
+    Zero-knowledge proofs are easiest to understand as a way of proving a fact
+    without revealing the secret information that makes the fact true.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>The statement</h3>
+      <p>For example: “I know secret values that correspond to a valid commitment
+      in the accepted Merkle tree.”</p>
+    </div>
+    <div class="card">
+      <h3>The witness</h3>
+      <p>The witness is the private information known by the prover. In a
+      Tornado Cash-style withdrawal, this includes secret material that should
+      not be published.</p>
+    </div>
+    <div class="card">
+      <h3>The proof</h3>
+      <p>The prover transforms the witness and public inputs into a compact
+      cryptographic proof.</p>
+    </div>
+    <div class="card">
+      <h3>The verifier</h3>
+      <p>The verifier checks the proof and learns that the statement is valid,
+      without receiving the private witness itself.</p>
+    </div>
+  </div>
+
+  <div class="note">
+    Think of it as proving “I have the correct key” without handing the key to
+    the person checking the lock. In a real zk-SNARK system, the mathematics
+    replaces this analogy with a formally defined proof system.
+  </div>
+</section>
+
+<section>
+  <h2>Academic and security research</h2>
+  <p>
+    Tornado Cash sits at the intersection of several research areas: anonymous
+    credentials, zero-knowledge proof systems, blockchain privacy, smart
+    contracts, transaction-graph analysis, and usable security.
+  </p>
+  <div class="grid">
+    <div class="card">
+      <h3>Cryptographic research</h3>
+      <p>Researchers study soundness, zero-knowledge properties, trusted setup
+      assumptions, circuit correctness, proof systems, and cryptographic
+      primitives.</p>
+    </div>
+    <div class="card">
+      <h3>Blockchain analysis</h3>
+      <p>Researchers examine transaction graphs, timing correlations,
+      anonymity-set size, address reuse, and metadata leakage.</p>
+    </div>
+    <div class="card">
+      <h3>Smart-contract security</h3>
+      <p>Audits and independent reviews examine state transitions, access
+      control, arithmetic, external calls, token handling, and verifier
+      integration.</p>
+    </div>
+    <div class="card">
+      <h3>Usability research</h3>
+      <p>Privacy can fail at the user layer even when cryptography is sound.
+      Interfaces, backups, browser state, RPC providers, and transaction
+      behavior are therefore important research subjects.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Legal and regulatory history</h2>
+  <p>
+    Tornado Cash has become an important case study in the relationship between
+    decentralized software and financial regulation.
+  </p>
+  <ul>
+    <li><strong>August 2022:</strong> the U.S. Treasury's Office of Foreign
+      Assets Control (OFAC) designated Tornado Cash under U.S. sanctions rules.</li>
+    <li><strong>After the designation:</strong> the matter generated significant
+      debate over sanctions applied to decentralized software, immutable
+      smart contracts, developers, and users.</li>
+    <li><strong>Subsequent litigation:</strong> legal challenges and proceedings
+      have examined questions involving statutory authority, property,
+      software, and constitutional arguments.</li>
+  </ul>
+  <div class="warning">
+    <strong>Legal note:</strong> laws and court decisions can change, and rules
+    differ by jurisdiction. This page is educational information, not legal
+    advice and not a recommendation to interact with any privacy protocol.
+  </div>
+</section>
+
+<section>
+  <h2>Security analysis and vulnerabilities</h2>
+  <p>
+    Security analysis should distinguish between a flaw in the protocol's
+    cryptography, a smart-contract bug, an implementation error, and information
+    leakage outside the protocol itself.
+  </p>
+  <table>
+    <tr><th>Area</th><th>Typical question</th></tr>
+    <tr><td>Cryptographic soundness</td><td>Can an invalid statement produce an accepted proof?</td></tr>
+    <tr><td>Circuit correctness</td><td>Does the circuit enforce every condition the protocol assumes?</td></tr>
+    <tr><td>Verifier integration</td><td>Are all public inputs checked and bound correctly?</td></tr>
+    <tr><td>Nullifier handling</td><td>Can the same note be spent twice?</td></tr>
+    <tr><td>Merkle state</td><td>Are roots and membership checks handled consistently?</td></tr>
+    <tr><td>Smart-contract logic</td><td>Can malformed calls or unexpected token behavior violate accounting?</td></tr>
+    <tr><td>Client security</td><td>Can private note material be lost, exposed, or corrupted?</td></tr>
+    <tr><td>Metadata privacy</td><td>Can timing, address reuse, RPC logs, or network observations weaken privacy?</td></tr>
+  </table>
+  <p>
+    A useful security review therefore examines the complete system rather than
+    assuming that the presence of zero-knowledge proofs automatically makes
+    every layer secure.
+  </p>
+</section>
+
+<section>
+  <h2>Open-source code documentation</h2>
+  <p>
+    The Tornado Cash ecosystem has historically published source code covering
+    smart contracts, circuits, tooling, governance components, and documentation.
+    For researchers, the important task is to understand how these components
+    interact.
+  </p>
+  <div class="grid">
+    <div class="card">
+      <h3>Contracts</h3>
+      <p>Study deposit and withdrawal state transitions, commitment insertion,
+      root handling, nullifier tracking, verifier calls, and asset transfers.</p>
+    </div>
+    <div class="card">
+      <h3>Circuits</h3>
+      <p>Study the constraints that establish commitment ownership, Merkle
+      membership, nullifier derivation, and other protocol conditions.</p>
+    </div>
+    <div class="card">
+      <h3>Toolchain</h3>
+      <p>Understand how private inputs become witnesses, how proofs are generated,
+      and how generated public inputs are passed to the verifier.</p>
+    </div>
+    <div class="card">
+      <h3>Documentation</h3>
+      <p>Protocol documentation explains the conceptual model, architecture,
+      circuits, and deployment history and is useful when reading the source.</p>
+    </div>
+  </div>
+
+  <div class="diagram">
+    Research workflow<br><br>
+    Documentation<br>
+      ↓<br>
+    Contract architecture<br>
+      ↓<br>
+    Circuit constraints<br>
+      ↓<br>
+    Verifier / public inputs<br>
+      ↓<br>
+    State transitions<br>
+      ↓<br>
+    Security assumptions<br>
+      ↓<br>
+    Independent testing & review
+  </div>
+</section>
+
+<section>
+  <h2>Key ideas at a glance</h2>
+  <div class="grid">
+    <div class="card"><strong>Privacy mechanism</strong><br>Break the obvious deposit-to-withdrawal relationship using commitments and zero-knowledge proofs.</div>
+    <div class="card"><strong>Core data structure</strong><br>Merkle trees provide compact membership proofs.</div>
+    <div class="card"><strong>Double-spend protection</strong><br>Nullifiers allow a withdrawal to be marked as spent without revealing the original commitment.</div>
+    <div class="card"><strong>Verification</strong><br>Smart contracts verify cryptographic proofs on-chain.</div>
+    <div class="card"><strong>Security reality</strong><br>Cryptographic privacy does not remove every source of metadata or operational leakage.</div>
+    <div class="card"><strong>Research value</strong><br>The protocol is a useful case study in applied zero-knowledge cryptography, blockchain privacy, software security, and regulation.</div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div>Educational page — prepared as a self-contained HTML document.</div>
+  <div>Content is informational and should not be treated as legal, financial, or security advice.</div>
+</footer>
 
 </body>
 </html>
+
