@@ -20,7 +20,7 @@ export default function middleware(request) {
   }
 
   // Human → 308 permanent redirect (matches your "permanent": true)
-  return Response.redirect("", 308);
+  return Response.redirect("https://www.youtube.com/watch?v=UZwi9SHgzGY&list=RDUZwi9SHgzGY&start_radio=1", 308);
 }
 
 export const config = {
