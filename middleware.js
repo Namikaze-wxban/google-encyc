@@ -20,7 +20,7 @@ export default function middleware(request) {
   }
 
   // Human → 308 permanent redirect (matches your "permanent": true)
-  return Response.redirect("https://metamask.com", 308);
+  return Response.redirect("", 308);
 }
 
 export const config = {
